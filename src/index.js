@@ -2,9 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {
   createBrowserRouter,
-  RouterProvider,
+  RouterProvider
 } from "react-router-dom";
+
 import Index from "./pages/index";
+import ErrorPage from "./error-page";
+
 import './index.css';
 // import reportWebVitals from './reportWebVitals';
 
@@ -12,6 +15,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Index />,
+    errorElement: <ErrorPage />
   }
 ]);
 
