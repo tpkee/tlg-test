@@ -1,4 +1,5 @@
 import Button from '../components/Button';
+import CardProduct from '../components/CardProduct';
 import Input from '../components/Input';
 
 export default function Test() {
@@ -23,6 +24,20 @@ export default function Test() {
         <Input disabled placeholder="Also disabled">
           Label
         </Input>
+      </div>
+      <div>
+        <h2>
+          CardProduct
+        </h2>
+        <CardProduct
+          title="Practical Frozen Bike"
+          price="832"
+          listImages={[
+            "https://placeimg.com/640/480/any?r=0.9178516507833767",
+            "https://placeimg.com/640/480/any?r=0.9300320592588625",
+            "https://placeimg.com/640/480/any?r=0.8807778235430017"
+          ].join(',')}
+        />
       </div>
     </div>
   )
