@@ -1,12 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
+
 import Button from '../components/Button';
 import Input from '../components/Input';
 
 export default function Login() {
+  const navigate = useNavigate()
+  
   const [email, setEmail] = useState('chopchop@turoro.dasm');
   const [password, setPassword] = useState('AValidPassw0rd');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem('access_token')) {
+      navigate('/')
+    }
+  })
 
   function onLogin (event) {
     setIsLoading(true)
@@ -39,6 +49,8 @@ export default function Login() {
         }
         const { access_token } = data
         sessionStorage.setItem('access_token', access_token)
+        navigate('/')
+
       }
       setIsLoading(false)
     })
