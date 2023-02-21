@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 
 import Index from "./pages/index";
+import Login from "./pages/login";
 import Test from "./pages/test";
 import ErrorPage from "./error-page";
 
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/test",
     element: <Test />
+  },
+  {
+    path: "/login",
+    element: <Login />
   }
 ]);
 
