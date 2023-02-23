@@ -6,9 +6,6 @@ import {
 } from "react-router-dom";
 import { RecoilRoot } from 'recoil';
 
-
-import Navbar from "./components/Navbar";
-
 import ProductsPage from "./pages/index";
 import LoginPage from "./pages/login";
 import SignUpPage from "./pages/signup";

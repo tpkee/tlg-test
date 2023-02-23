@@ -6,9 +6,9 @@ import Button from "./Button";
 
 export default function Navbar () {
   return (
-    <>
+    <div  className="py-40">
       <div className="fixed top-0 left-0 bg-white w-full  border border-slate-200">
-        <div className="flex justify-center items-center gap-x-3 p-5">
+        <div className="flex justify-center items-center gap-x-6 p-5">
           <NavLink to="/" className={({ isActive }) =>
               isActive ? 'underline' : ''
             }>
@@ -25,7 +25,7 @@ export default function Navbar () {
           </Button>
         </div>
       </div>
-      <Outlet className="p-10" />
-    </>
+      <Outlet />
+    </div>
   )
 }

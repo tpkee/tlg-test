@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 
-import { useAuth, logout } from '../auth/auth';
+import { useAuth } from '../auth/auth';
 import CardSkeleton from '../components/CardSkeleton';
 import CardProduct from '../components/CardProduct';
 import Button from '../components/Button';
 
 export default function ProductsPage() {
+  
   useAuth('logged')
+
   const [page, setPage] = useState(1)
   const [offset, setOffset] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
@@ -36,10 +38,7 @@ export default function ProductsPage() {
 
 
   return (
-    <div className='flex flex-col items-center gap-y-6 py-10'>
-      <Button onClick={() => logout()}>
-        Logout
-      </Button>
+    <div className='flex flex-col items-center gap-y-6 '>
       <h1 className='text-4xl font-bold'>
         Products page
       </h1>
