@@ -36,23 +36,42 @@ export default function ProductsPage() {
 
 
   return (
-    <>
+    <div className='flex flex-col items-center gap-y-6 py-10'>
       <Button onClick={() => logout()}>
         Logout
       </Button>
-      <div className='flex justify-center'>
-        <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-2'>
+      <h1 className='text-4xl font-bold'>
+        Products page
+      </h1>
+      <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-2'>
         { isLoading ? 
-            [1,2,3,4].map(el => <CardSkeleton key={el} />) : 
+            Array.from(Array(12).keys()).map(el => <CardSkeleton key={el} />) : 
               products.length > 0 ?
                 products.map(el => <CardProduct key={el.id} title={el.title} price={el.price} image={el.images?.at(0)} />)
                   : 'There are no products'
           }
-        </div>
       </div>
-      <div className='flex flex-wrap'>
-        
+      <div className='flex flex-wrap gap-1'>
+        <Button disabled={page - 1 < 1 } onClick={() => 
+          {
+            setOffset(prev => prev - 12)
+            setPage(prev => prev - 1)
+          }
+        }>
+          back
+        </Button>
+        <span className='select-none px-2.5 py-1.5 border rounded'>
+          {page}
+        </span>
+        <Button disabled={!products.length} onClick={() => 
+          {
+            setOffset(prev => prev + 12)
+            setPage(prev => prev + 1)
+          }
+        }>
+          next
+        </Button>
       </div>
-    </>
+    </div>
   )
 }
