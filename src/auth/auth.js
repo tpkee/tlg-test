@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useResetRecoilState } from "recoil";
+import { listWishlistState } from "../state/Wishlist";
 
 function useAuth (ward = 'logged') {
   /*
@@ -32,7 +34,7 @@ function useAuth (ward = 'logged') {
 
 function logout () {
   sessionStorage.removeItem('access_token')
-  window.location.reload()
+  window.location.reload() // ! this will clean the state
 
 }
 
