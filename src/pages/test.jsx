@@ -1,4 +1,5 @@
 import Button from '../components/Button';
+import CardSkeleton from '../components/CardSkeleton';
 import CardProduct from '../components/CardProduct';
 import Input from '../components/Input';
 
@@ -34,6 +35,12 @@ export default function Test() {
           price="832"
           image="https://placeimg.com/640/480/any?r=0.9178516507833767"
         />
+      </div>
+      <div>
+        <h2>
+          CardSkeleton
+        </h2>
+        <CardSkeleton />
       </div>
     </div>
   )
