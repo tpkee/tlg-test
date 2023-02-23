@@ -19,6 +19,11 @@ export default function Navbar () {
             }>
             Contact
           </NavLink>
+          <NavLink to="/wishlist" className={({ isActive }) =>
+              isActive ? 'underline' : ''
+            }>
+            Wishlist
+          </NavLink>
 
           <Button onClick={() => logout()}>
             Logout
