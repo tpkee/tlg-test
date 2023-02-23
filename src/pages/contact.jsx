@@ -27,7 +27,7 @@ export default function Contact() {
       if (isErrors) {
         setErrors(false)
       }
-      console.log(contactForm)
+      console.table(contactForm)
     } else {
       setErrors(true)
     }
