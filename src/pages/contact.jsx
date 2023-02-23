@@ -2,7 +2,10 @@ import { useState } from 'react';
 
 import { useAuth } from '../auth/auth';
 
+import Checkbox from '../components/Checkbox';
+import Textarea from '../components/Textarea';
 import Button from '../components/Button';
+import Select from '../components/Select';
 import Input from '../components/Input';
 
 export default function Contact() {
@@ -14,12 +17,20 @@ export default function Contact() {
     email: '',
     subject: '',
     text: '',
-    isConsent: false
+    isConsenting: false
   });
+  const [isErrors, setErrors] = useState(false)
 
 
   function onContact (event) {
-    console.log(contactForm)
+    if (contactForm.isConsenting) {
+      if (isErrors) {
+        setErrors(false)
+      }
+      console.log(contactForm)
+    } else {
+      setErrors(true)
+    }
     event.preventDefault()
   }
 
@@ -28,7 +39,7 @@ export default function Contact() {
       <h1 className="text-2xl pb-5">  
         Contact us
       </h1>
-      <form className='space-y-2' onSubmit={e => onContact(e)}>
+      <form className='space-y-2' method='post' onSubmit={e => onContact(e)}>
         <Input 
           type="text"
           placeholder="Your name"
@@ -56,18 +67,32 @@ export default function Contact() {
         >
           Email
         </Input>
-        {
-        // todo: add select here
-        }
-        {
-        // todo: add textarea here
-        }
-        {
-        // todo: add checkbox here
-        }
+        <Select 
+          defaultValue={contactForm.subject} 
+          onChange={e => setContactForm({...contactForm, subject: e.target.value})}
+          required
+        >
+          <option value='' disabled>
+            Select a subject
+          </option>
+          <option value='something_something'>
+            Something something
+          </option>
+          <option value='dunno'>
+            Dunno
+          </option>
+        </Select>
+        <Textarea 
+          required
+          onInput={e => setContactForm({...contactForm, text: e.target.value})} 
+        />
+        <Checkbox checked={contactForm.isConsenting} onChange={e => setContactForm({...contactForm, isConsenting: e.target.checked})}>
+          You accept our privacy policy (required)
+        </Checkbox>
         <Button type="submit">
           Send
         </Button>
+        <p className={`text-red-500 ${isErrors ? 'block' : 'hidden'}`}>You must accept the privacy policy!</p>
       </form>
     </div>
   )
