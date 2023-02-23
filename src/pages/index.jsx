@@ -1,17 +1,17 @@
-import { useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useAuth, logout } from '../auth/auth';
+import Button from '../components/Button';
 
 export default function Index() {
-  const navigate = useNavigate()
-  useEffect(() => {
-    if (!sessionStorage.getItem('access_token')) {
-      navigate('/login')
-    }
-  })
+  useAuth('logged')
 
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+    <>
+      <h1 className="text-3xl font-bold underline">
+        Hello world!
+      </h1>
+      <Button onClick={() => logout()}>
+        Logout
+      </Button>
+    </>
   )
 }

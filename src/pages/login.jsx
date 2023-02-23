@@ -1,22 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+
+import { useAuth } from '../auth/auth';
 
 import Button from '../components/Button';
 import Input from '../components/Input';
 
 export default function Login() {
-  const navigate = useNavigate()
-  
+
   const [email, setEmail] = useState('chopchop@turoro.dasm');
   const [password, setPassword] = useState('AValidPassw0rd');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    if (sessionStorage.getItem('access_token')) {
-      navigate('/')
-    }
-  })
+  useAuth('guest')
 
   function onLogin (event) {
     setIsLoading(true)
@@ -49,7 +45,6 @@ export default function Login() {
         }
         const { access_token } = data
         sessionStorage.setItem('access_token', access_token)
-        navigate('/')
 
       }
       setIsLoading(false)
@@ -73,6 +68,7 @@ export default function Login() {
           placeholder="email@example.com"
           value={email} 
           onInput={e => setEmail(e.target.value)}
+          onChange={() => setError('')}
           required 
         >
           Email
@@ -86,6 +82,7 @@ export default function Login() {
           autoComplete="on"
           value={password} 
           onInput={e => setPassword(e.target.value)}
+          onChange={() => setError('')}
           required 
         >
           Password
