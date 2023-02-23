@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
-
+import { useRecoilState } from "recoil";
+import { listWishlistState } from "../state/Wishlist";
 import { useAuth } from '../auth/auth';
+
 import CardSkeleton from '../components/CardSkeleton';
 import CardProduct from '../components/CardProduct';
 import Button from '../components/Button';
@@ -13,6 +15,8 @@ export default function ProductsPage() {
   const [offset, setOffset] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
   const [products, setProducts] = useState([])
+
+  const [listWishlist, setListWishlist] = useRecoilState(listWishlistState)
 
   useEffect(() => {
     let ignore = false;
@@ -36,6 +40,16 @@ export default function ProductsPage() {
     
   }, [offset]);
 
+  function editWishlist (obj) {
+    const i = listWishlist.findIndex(el => el.id === obj.id)
+
+    if (i === -1) {
+      setListWishlist([...listWishlist, obj])
+    } else {
+      setListWishlist([...listWishlist.slice(0, i), ...listWishlist.slice(i + 1)])
+    }
+  }
+
 
   return (
     <div className='flex flex-col items-center gap-y-6 '>
@@ -46,7 +60,17 @@ export default function ProductsPage() {
         { isLoading ? 
             Array.from(Array(12).keys()).map(el => <CardSkeleton key={el} />) : 
               products.length > 0 ?
-                products.map(el => <CardProduct key={el.id} title={el.title} price={el.price} image={el.images?.at(0)} />)
+                products.map(
+                  el => 
+                    <CardProduct 
+                      key={el.id}
+                      title={el.title}
+                      price={el.price}
+                      image={el.images?.at(0)}
+                      isWishlisted={listWishlist.some(w => w.id === el.id)}
+                      onClick={() => editWishlist(el)}
+                    />
+                  )
                   : 'There are no products'
           }
       </div>
