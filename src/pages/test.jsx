@@ -1,4 +1,5 @@
 import Button from '../components/Button';
+import Select from '../components/Select';
 import CardSkeleton from '../components/CardSkeleton';
 import CardProduct from '../components/CardProduct';
 import Input from '../components/Input';
@@ -41,6 +42,16 @@ export default function Test() {
           CardSkeleton
         </h2>
         <CardSkeleton />
+      </div>
+      <div className='max-w-sm'>
+        <h2>
+          Select
+        </h2>
+        <Select defaultValue='' label="my select">
+          <option value='' disabled selected>Select something</option>
+          <option value="something">lol</option>
+          <option value="das">das</option>
+        </Select>
       </div>
     </div>
   )
