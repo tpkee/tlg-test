@@ -56,9 +56,9 @@ export default function SignUpPage() {
       <h1 className="text-2xl pb-5">  
         Login
       </h1>
-      <form className='space-y-2' method='get' onSubmit={e => onSignUp(e)}>
+      <form className='space-y-2' method='post' onSubmit={e => onSignUp(e)}>
         <Input 
-          type="name"
+          type="text"
           placeholder="Your name"
           value={user.name} 
           onInput={e => setUser({...user, name: e.target.value})}
