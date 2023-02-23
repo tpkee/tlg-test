@@ -7,7 +7,7 @@ import {
 import { RecoilRoot } from 'recoil';
 
 
-import Navbar from "./components/Navbar";
+import Navbar from './components/Navbar'
 
 import ProductsPage from "./pages/index";
 import LoginPage from "./pages/login";
