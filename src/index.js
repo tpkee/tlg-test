@@ -13,6 +13,7 @@ import ProductsPage from "./pages/index";
 import LoginPage from "./pages/login";
 import SignUpPage from "./pages/signup";
 import ContactPage from "./pages/contact";
+import WishlistPage from "./pages/wishlist";
 import Test from "./pages/test";
 import ErrorPage from "./error-page";
 
@@ -22,15 +23,19 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Navbar />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
         element: <ProductsPage />,
-        errorElement: <ErrorPage />
       },
       {
         path: "/test",
         element: <Test />
+      },
+      {
+        path: "/wishlist",
+        element: <WishlistPage />
       },
       {
         path: "/contact",
