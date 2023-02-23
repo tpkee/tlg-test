@@ -22,9 +22,9 @@ function useAuth (ward = 'logged') {
       return
     }
     
-    if (ward === 'logged' && !access_token) {
+    if (ward === 'logged' && typeof access_token !== 'string') {
       navigate('/login')
-    } else if (ward === 'guest' && access_token) {
+    } else if (ward === 'guest' && typeof access_token === 'string') {
       navigate('/')
     }
   })
