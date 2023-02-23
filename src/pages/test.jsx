@@ -4,6 +4,7 @@ import CardSkeleton from '../components/CardSkeleton';
 import CardProduct from '../components/CardProduct';
 import Input from '../components/Input';
 import Textarea from '../components/Textarea';
+import Checkbox from '../components/Checkbox';
 
 export default function Test() {
   return (
@@ -65,6 +66,14 @@ export default function Test() {
         <Textarea placeholder="Also">
           Label
         </Textarea>
+      </div>
+      <div>
+        <h3>
+          Checkbox
+        </h3>
+        <Checkbox>
+          Check me
+        </Checkbox>
       </div>
     </div>
   )
