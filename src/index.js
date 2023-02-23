@@ -7,6 +7,8 @@ import {
 import { RecoilRoot } from 'recoil';
 
 
+import Navbar from "./components/Navbar";
+
 import ProductsPage from "./pages/index";
 import LoginPage from "./pages/login";
 import SignUpPage from "./pages/signup";
@@ -18,13 +20,23 @@ import './index.css';
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <ProductsPage />,
-    errorElement: <ErrorPage />
-  },
-  {
-    path: "/test",
-    element: <Test />
+    path: '/',
+    element: <Navbar />,
+    children: [
+      {
+        path: "/",
+        element: <ProductsPage />,
+        errorElement: <ErrorPage />
+      },
+      {
+        path: "/test",
+        element: <Test />
+      },
+      {
+        path: "/contact",
+        element: <ContactPage />
+      },
+    ]
   },
   {
     path: "/login",
@@ -34,10 +46,6 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <SignUpPage />
   },
-  {
-    path: "/contact",
-    element: <ContactPage />
-  }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
