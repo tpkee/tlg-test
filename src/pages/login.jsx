@@ -63,7 +63,7 @@ export default function LoginPage() {
       <h1 className="text-2xl pb-5">  
         Login
       </h1>
-      <form className='space-y-2' method='get' onSubmit={e => onLogin(e)}>
+      <form className='space-y-2' method='post' onSubmit={e => onLogin(e)}>
         <Input 
           type="email"
           placeholder="email@example.com"
