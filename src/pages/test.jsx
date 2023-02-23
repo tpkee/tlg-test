@@ -3,6 +3,7 @@ import Select from '../components/Select';
 import CardSkeleton from '../components/CardSkeleton';
 import CardProduct from '../components/CardProduct';
 import Input from '../components/Input';
+import Textarea from '../components/Textarea';
 
 export default function Test() {
   return (
@@ -48,10 +49,22 @@ export default function Test() {
           Select
         </h2>
         <Select defaultValue='' label="my select">
-          <option value='' disabled selected>Select something</option>
+          <option value='' disabled>Select something</option>
           <option value="something">lol</option>
           <option value="das">das</option>
         </Select>
+      </div>
+      <div>
+        <h3>
+          Textarea (no label)
+        </h3>
+        <Textarea placeholder="Hello there!" />
+        <h3>
+          Textarea (with label)
+        </h3>
+        <Textarea placeholder="Also">
+          Label
+        </Textarea>
       </div>
     </div>
   )
