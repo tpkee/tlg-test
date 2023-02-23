@@ -4,6 +4,8 @@ import {
   createBrowserRouter,
   RouterProvider
 } from "react-router-dom";
+import { RecoilRoot } from 'recoil';
+
 
 import ProductsPage from "./pages/index";
 import LoginPage from "./pages/login";
@@ -41,6 +43,8 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <RecoilRoot>
         <RouterProvider router={router} />
+    </RecoilRoot>
   </React.StrictMode>
 );
