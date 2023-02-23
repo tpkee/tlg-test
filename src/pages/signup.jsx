@@ -1,57 +1,50 @@
 import { useState } from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 import { useAuth } from '../auth/auth';
 
 import Button from '../components/Button';
 import Input from '../components/Input';
 
-export default function Login() {
+export default function SignUp() {
+  const navigate = useNavigate()
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [user, setUser] = useState({
+    "email": "",
+    "name": "",
+    "password": "",
+    "role": "customer",
+    "avatar": "https://pixy.org/src/20/201310.jpg"
+  });
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   useAuth('guest')
 
-  function onLogin (event) {
+  function onSignUp (event) {
     setIsLoading(true)
-    fetch('https://api.escuelajs.co/api/v1/auth/login', {
+    fetch('https://api.escuelajs.co/api/v1/users', {
       method: "post",
       headers: {
         'Content-type': 'application/json'
       },
-      body: JSON.stringify({
-        email,
-        password
-      })
+      body: JSON.stringify(user)
     })
     .then(res => {
       switch (res.status) {
         case 201:
-          return res.json()
+          navigate('/login')
+          return
         case 401:
           setError(`Invalid credentials`)
           break
           default:
             setError(`It wasn't possible to fetch the data, ${res.status} ${res.statusText}`)
       }
-      return undefined
-    })
-    .then(data => {
-      if (data) {
-        if (error) {
-          setError('')
-        }
-        const { access_token } = data
-        sessionStorage.setItem('access_token', access_token)
-
-      }
       setIsLoading(false)
     })
     .catch(err => {
-      setError(`It wasn't possible to fetch the data, ${err}`)
+      setError(`It wasn't possible to create the user, ${err}`)
       console.error(err)
       setIsLoading(false)
     })
@@ -63,13 +56,23 @@ export default function Login() {
       <h1 className="text-2xl pb-5">  
         Login
       </h1>
-      <form className='space-y-2' method='get' onSubmit={e => onLogin(e)}>
+      <form className='space-y-2' method='get' onSubmit={e => onSignUp(e)}>
+        <Input 
+          type="name"
+          placeholder="Your name"
+          value={user.name} 
+          onInput={e => setUser({...user, name: e.target.value})}
+          onChange={() => error ? setError('') : undefined}
+          required 
+        >
+          Name
+        </Input>
         <Input 
           type="email"
           placeholder="email@example.com"
-          value={email} 
-          onInput={e => setEmail(e.target.value)}
-          onChange={() => setError('')}
+          value={user.email} 
+          onInput={e => setUser({...user, email: e.target.value})}
+          onChange={() => error ? setError('') : undefined}
           required 
         >
           Email
@@ -81,23 +84,23 @@ export default function Login() {
           pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$"
           title="at least one uppercase, at least one lowercase, at least a number and a minimum of 8 character"
           autoComplete="on"
-          value={password} 
-          onInput={e => setPassword(e.target.value)}
-          onChange={() => setError('')}
+          value={user.password} 
+          onInput={e => setUser({...user, password: e.target.value})}
+          onChange={() => error ? setError('') : undefined}
           required 
         >
           Password
         </Input>
         <Button type="submit" disabled={isLoading || error}>
-          Login
+          Signup
         </Button>
-        <span className={isLoading ? 'block' : 'hidden'}> Logging in...</span>
+        <span className={isLoading ? 'block' : 'hidden'}> Signing up...</span>
         <p className={`text-red-500 ${error ? 'block' : 'hidden'}`}>
           {error}
         </p>
       </form>
-      <NavLink to="/signup" className="underline hover:text-slate-700">
-        Go to signup
+      <NavLink to="/login" className="underline hover:text-slate-700">
+        Go to login
       </NavLink>
     </div>
   )
