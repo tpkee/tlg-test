@@ -6,7 +6,7 @@ import { useAuth } from '../auth/auth';
 import Button from '../components/Button';
 import Input from '../components/Input';
 
-export default function SignUp() {
+export default function SignUpPage() {
   const navigate = useNavigate()
 
   const [user, setUser] = useState({
